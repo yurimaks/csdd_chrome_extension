@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>CSDD Extension parameter page</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    #delay
+    {
+      width: 50px;
+    }
+    body {
+      width: 300px;
+      height: 100%;
+      font-size: 16px;
+    }
+    #status {
+      color: green;
+    }
+  </style>
+</head>
+<body>
+  <label for="months">Monitor places in </label>
+  <select id="months">
+    <option value="1" label="January">
+    <option value="2" label="February">
+    <option value="3" label="March">
+    <option value="4" label="April">
+    <option value="5" label="May">
+    <option value="6" label="June">
+    <option value="7" label="July">
+    <option value="8" label="August">
+    <option value="9" label="September">
+    <option value="10" label="October">
+    <option value="11" label="November">
+    <option value="12" label="December">
+  </select>
+  <br/ >
+  <label>Refresh page delay</label>
+  <input type="number" id="delay" min="5" max="30" value="10">
+  <label>seconds</label>
+  <input type="button" value="start" id="start"/>
+  <label id="status"></label>
+  <script src="./parameters.js"></script>
+</body>
+</html>

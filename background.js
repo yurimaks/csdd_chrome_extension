@@ -19,6 +19,9 @@ function checkAvailableDates(month, delay, play)
   var options = selector.getElementsByTagName('option')
   var nonEmpty = []
   var pattern = /(\d{2})\.(\d{2})\.(\d{4})/;
+
+  month = month + 1
+
   var thD = "01." +month+".2021"
   var thresholdDate = new Date(thD.replace(pattern,'$3-$2-$1'))
   var logStr = ""
@@ -82,12 +85,24 @@ function checkAvailableDates(month, delay, play)
 
 chrome.runtime.onInstalled.addListener(async () => {console.log("start ex")});
 
-//chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => { //onActivated
-chrome.webNavigation.onCompleted.addListener(function (details) {
-//chrome.tabs.get(details.tabId, function(tab) { console.log(tab.url); });
-  chrome.scripting.executeScript({
-    target: {tabId: details.tabId},
-    func: checkAvailableDates,
-    args: [10, 15000, true]
-  });
-}, {url: [{urlMatches : 'https://e.csdd.lv/examp/'}]});
+chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
+
+  var payload = request.payload
+  //chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => { //onActivated
+  chrome.webNavigation.onCompleted.addListener(function (details){
+    //chrome.tabs.get(details.tabId, function(tab) { console.log(tab.url); });
+      chrome.scripting.executeScript({
+        target: {tabId: details.tabId},
+        func: checkAvailableDates,
+        //files: ["./foregroud.js"]
+        args: [payload.targetMonth, payload.delay, payload.playMusic]
+      });
+    },{ url: [
+      {
+        //urlMatches : 'https://e.csdd.lv/examp/'
+        urlMatches : 'https://e.csdd.lv/*'
+      }
+    ]});
+
+  sendResponse({message:"success"});
+});

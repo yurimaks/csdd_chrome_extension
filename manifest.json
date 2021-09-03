@@ -1,6 +1,6 @@
 {
   "manifest_version": 3,
-  "version": "1.0",
+  "version": "1.1",
   "name": "CSDD Exam date",
   "description": "This is an extention which helps to find and notify earliest exam date",
   "icons": {
@@ -11,7 +11,10 @@
  "background": {
   "service_worker": "background.js"
   },
-  "permissions": ["tabs","scripting","webNavigation"],
+  "permissions": ["activeTab","scripting","webNavigation"],
   "host_permissions": ["https://e.csdd.lv/"],
-  "action": {}
+  "action": {
+    "default_title": "CSDD Exam date",
+    "default_popup": "parameters.html"
+  }
 }
