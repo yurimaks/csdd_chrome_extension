@@ -1,19 +1,18 @@
-function checkAvailableDates(month, delay, play) {
+function checkAvailableDates(month, delay, play)
+{
   var selector = document.querySelector("#datums")
   var ch = document.querySelector("#setdatums")
 
   if (!(selector) && !(ch))
   {
-    console.warn("Exit. Nothing to do")
+    logInfo("Exit. Nothing to do")
     return
   }
 
   if (!(selector) && ch)
   {
-    console.info("Back to dates. Refreshing...")
-    setTimeout(function(){ 
-      ch.click()
-    }, delay);
+    logInfo("Back to dates in 5 seconds. Refreshing...")
+    setTimeout(function(){ ch.click() }, 5000);
     return
   }
 
@@ -26,25 +25,25 @@ function checkAvailableDates(month, delay, play) {
   for (var i = 0; i < options.length; i++) {
     if (options[i].innerText.indexOf("Brīvās vietas: 0") != -1 ||
         options[i].innerText.indexOf("saraksta") != -1) continue
-    
+
     var splited = options[i].innerText.split(" Brīvās vietas: ")
     var date = new Date(splited[0].replace(pattern,'$3-$2-$1'));
     if (date < thresholdDate)
       nonEmpty.push({id:i, date:date, freePlaces:parseInt(splited[1])})
     logStr += options[i].innerText + ", "
   }
-  console.log("Dates:" + logStr)
+  logInfo("Available dates:" + logStr)
 
   if (nonEmpty.length != 0)
   {
-    console.info(getMomentLog() + "Found earlier date. Notify. (play music)")
+    logInfo("Found earlier date. Notify. (play music)")
     if (play)
     {
       var typeWriter = new Audio("https://www.freesound.org/data/previews/256/256458_4772965-lq.mp3");
       typeWriter.loop = false
       typeWriter.play().then(function()
       {
-        console.info("Waiting for action and refreshing")
+        logInfo("Waiting "+(delay/1000)+" for action and refreshing")
         refresh(delay)
       })
     }
@@ -63,10 +62,21 @@ function checkAvailableDates(month, delay, play) {
     }, delay);
   }
 
-  function getMomentLog()
+  function getMomentLog(currentDate)
   {
-    var now = new Date()
-    return now.toDateString() +' ' + now.toTimeString()
+    var currentDate = currentDate || new Date();
+    return getCurrentTime(currentDate)
+  }
+
+  function getCurrentTime(currentDate)
+  {
+    var currentDate = currentDate || new Date();
+    return (currentDate.getHours()<10?'0':'')+currentDate.getHours()+':'+(currentDate.getMinutes()<10?'0':'')+currentDate.getMinutes()+':'+(currentDate.getSeconds()<10?'0':'')+currentDate.getSeconds();
+  }
+
+  function logInfo(message)
+  {
+    console.log(getMomentLog() + " " + message)
   }
 }
 
