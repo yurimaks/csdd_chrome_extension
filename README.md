@@ -1,7 +1,7 @@
 # "CSDD Exam date" Chrome Extension
 
 ## Description
-This is an extension helps to find and notify the earliest exam date in CSDD's site: https://e.csdd.lv/examp/
+This extension helps to find and notify the earliest exam date on CSDD's site: https://e.csdd.lv/examp/
 
 ## Installation
 
@@ -10,7 +10,7 @@ This is an extension helps to find and notify the earliest exam date in CSDD's s
 3. Sign in at https://e.csdd.lv/examp/
 4. Open Chrome's console in DevTool (F12) and go to the date selector page
 
-After that the extension will automatically update the page and notify (play a sound) if new dates become available
+After that, the extension will automatically update the page and notify (play a sound) if new dates become available
 
 ![install1](https://user-images.githubusercontent.com/9975015/183713190-05d751b2-e01a-4822-9bf5-99484e3ee9ca.PNG)
 ![csdd1](https://user-images.githubusercontent.com/9975015/183713201-597b2756-5e57-40d4-b8e9-97ce9cb1fc5b.PNG)
